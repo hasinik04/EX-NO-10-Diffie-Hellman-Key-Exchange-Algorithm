@@ -20,11 +20,65 @@ To Implement Diffie Hellman Key Exchange Algorithm
 
 ## Program:
 
+```
+Name: K Hasini
+Reg: 212224240074
+```
 
+```
+#include <stdio.h>
+#include <math.h>
+
+long long power(long long base, long long exp, long long mod) {
+    long long result = 1;
+    while (exp > 0) {
+        if (exp % 2 == 1) {
+            result = (result * base) % mod;
+        }
+        base = (base * base) % mod;
+        exp /= 2;
+    }
+    return result;
+}
+
+int main() {
+    long long p, g, a, b, A, B, secretA, secretB;
+
+    // Step 1: Publicly agreed values
+    printf("Enter a large prime number (p): ");
+    scanf("%lld", &p);
+
+    printf("Enter a primitive root of %lld (g): ", p);
+    scanf("%lld", &g);
+
+    // Step 2: Private keys
+    printf("\nEnter Private Key for User A: ");
+    scanf("%lld", &a);
+
+    printf("Enter Private Key for User B: ");
+    scanf("%lld", &b);
+
+    // Step 3: Calculate public keys
+    A = power(g, a, p);
+    B = power(g, b, p);
+
+    printf("\nUser A's Public Key: %lld", A);
+    printf("\nUser B's Public Key: %lld", B);
+
+    // Step 4: Generate the Secret Key
+    secretA = power(B, a, p);
+    secretB = power(A, b, p);
+
+    printf("\n\nShared Secret Key (computed by User A): %lld", secretA);
+    printf("\nShared Secret Key (computed by User B): %lld\n", secretB);
+
+    return 0;
+}
+
+```
 
 ## Output:
-
-
+![Uploading image.png…]()
 
 ## Result:
   The program is executed successfully
